@@ -15,7 +15,7 @@ class Solution {
 			List<Integer> prev = l.get(i - 1);
 			ll.add(1);
 
-			for (int j = 0; j < prev.size() - 1; j++)
+			for (int j = 0; j < i - 1; j++)
 				ll.add(prev.get(j) + prev.get(j + 1));
 
 			ll.add(1);
