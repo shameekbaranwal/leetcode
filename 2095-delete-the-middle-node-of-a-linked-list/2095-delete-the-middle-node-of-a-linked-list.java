@@ -20,13 +20,13 @@ class Solution {
 
 		ListNode current = head.next.next;
 		ListNode midPrev = head;
-		boolean f = true;
+		int n = 2;
 
 		while (current != null) {
-			f = !f;
+			n++;
 			current = current.next;
 
-			if (f) 
+			if (n % 2 == 0) 
 				midPrev = midPrev.next;
 			
 		}
