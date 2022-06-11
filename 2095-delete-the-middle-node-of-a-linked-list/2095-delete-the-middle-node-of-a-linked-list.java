@@ -20,15 +20,15 @@ class Solution {
 
 		ListNode current = head.next.next;
 		ListNode midPrev = head;
-		int n = 2;
+		boolean f = true;
 
 		while (current != null) {
-			n++;
+			f = !f;
 			current = current.next;
 
-			if (n % 2 == 0) {
+			if (f) 
 				midPrev = midPrev.next;
-			}
+			
 		}
 
 		midPrev.next = midPrev.next.next;
