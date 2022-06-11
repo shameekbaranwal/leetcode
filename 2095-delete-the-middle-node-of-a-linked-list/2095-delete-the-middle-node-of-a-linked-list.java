@@ -28,8 +28,7 @@ class Solution {
 
 			if (n % 2 == 0) {
 				midPrev = midPrev.next;
-            }
-			
+			}
 		}
 
 		midPrev.next = midPrev.next.next;
