@@ -26,8 +26,9 @@ class Solution {
 			n++;
 			current = current.next;
 
-			if (n % 2 == 0) 
+			if (n % 2 == 0) {
 				midPrev = midPrev.next;
+            }
 			
 		}
 
