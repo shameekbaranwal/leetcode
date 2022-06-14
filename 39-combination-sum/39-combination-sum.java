@@ -14,17 +14,14 @@ class Solution {
 	}
 
 	public void dfs(int pointer, List<Integer> curr, int total) {
-		if (total > target)
-			return;
 		if (total == target) {
 			l.add(curr);
 			return;
 		}
-		if (pointer == candidates.length)
+		if (total > target || pointer == candidates.length)
 			return;
 
-		List<Integer> n = new ArrayList<Integer>();
-		n.addAll(curr);
+		List<Integer> n = new ArrayList<Integer>(curr);
 		n.add(candidates[pointer]);
 		dfs(pointer, n, total + candidates[pointer]);
 
