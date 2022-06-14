@@ -1,46 +1,39 @@
 import java.util.*;
 
 class Solution {
-	public static Map<Integer, List<List<Integer>>> map;
+	List<List<Integer>> l;
+	int[] candidates;
+	int target;
 
-	public static List<List<Integer>> combinationSum(int[] candidates, int target) {
-		map = new HashMap<Integer, List<List<Integer>>>();
-		Arrays.sort(candidates);
-		return combinationSumDP(candidates, target);
+	public List<List<Integer>> combinationSum(int[] candidates, int target) {
+		l = new ArrayList<List<Integer>>();
+		this.candidates = candidates;
+		this.target = target;
+		dfs(0, new ArrayList<Integer>(), 0);
+		return l;
 	}
 
-	public static List<List<Integer>> combinationSumDP(int[] candidates, int target) {
-		if (target == 0) {
-			List<List<Integer>> l = new ArrayList<List<Integer>>();
-			l.add(new ArrayList<Integer>());
-			return l;
+	public void dfs(int pointer, List<Integer> curr, int total) {
+		if (total > target)
+			return;
+		if (total == target) {
+			l.add(curr);
+			return;
 		}
+		if (pointer == candidates.length)
+			return;
 
-		if (target < 0 || candidates.length == 0)
-			return new ArrayList<List<Integer>>();
+		List<Integer> n = new ArrayList<Integer>();
+		n.addAll(curr);
+		n.add(candidates[pointer]);
+		dfs(pointer, n, total + candidates[pointer]);
 
-		if (target == candidates[0]) {
-			List<List<Integer>> l = new ArrayList<List<Integer>>();
-			List<Integer> l2 = new ArrayList<Integer>();
-			l2.add(target);
-			l.add(l2);
-			return l;
-		}
-
-		List<List<Integer>> l1 = combinationSum(candidates, target - candidates[0]);
-		for (int i = 0; i < l1.size(); i++)
-			l1.get(i).add(candidates[0]);
-
-		int[] newCandidates = new int[candidates.length - 1];
-		System.arraycopy(candidates, 1, newCandidates, 0, candidates.length - 1);
-		List<List<Integer>> l2 = combinationSum(newCandidates, target);
-		l1.addAll(l2);
-
-		return l1;
+		dfs(pointer + 1, curr, total);
 	}
 
 	public static void main(String[] args) {
 		int[] arr = { 2, 3, 6, 7 };
-		System.out.println(combinationSum(arr, 7));
+		Solution obj = new Solution();
+		System.out.println(obj.combinationSum(arr, 7));
 	}
 }
