@@ -1,51 +1,46 @@
-
-/*
-	https://leetcode.com/problems/combination-sum/
-*/
-
 import java.util.*;
 
 class Solution {
-	List<List<Integer>> combinationSum(int[] numbers, int targetSum) {
-		if (targetSum < 0)
-			return new LinkedList<List<Integer>>();
-		if (targetSum == 0) {
-			List<List<Integer>> l = new LinkedList<List<Integer>>();
-			l.add(new LinkedList<Integer>());
+	public static Map<Integer, List<List<Integer>>> map;
+
+	public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+		map = new HashMap<Integer, List<List<Integer>>>();
+		Arrays.sort(candidates);
+		return combinationSumDP(candidates, target);
+	}
+
+	public static List<List<Integer>> combinationSumDP(int[] candidates, int target) {
+		if (target == 0) {
+			List<List<Integer>> l = new ArrayList<List<Integer>>();
+			l.add(new ArrayList<Integer>());
 			return l;
 		}
 
-		List<List<Integer>> listsAddingToTarget = new LinkedList<List<Integer>>();
+		if (target < 0 || candidates.length == 0)
+			return new ArrayList<List<Integer>>();
 
-		for (int num : numbers) {
-			List<List<Integer>> l = combinationSum(numbers, targetSum - num);
-
-			for (List<Integer> subList : l) {
-				subList.add(num);
-				listsAddingToTarget.add(subList);
-			}
-
+		if (target == candidates[0]) {
+			List<List<Integer>> l = new ArrayList<List<Integer>>();
+			List<Integer> l2 = new ArrayList<Integer>();
+			l2.add(target);
+			l.add(l2);
+			return l;
 		}
 
-		return removeDuplicates(listsAddingToTarget);
+		List<List<Integer>> l1 = combinationSum(candidates, target - candidates[0]);
+		for (int i = 0; i < l1.size(); i++)
+			l1.get(i).add(candidates[0]);
+
+		int[] newCandidates = new int[candidates.length - 1];
+		System.arraycopy(candidates, 1, newCandidates, 0, candidates.length - 1);
+		List<List<Integer>> l2 = combinationSum(newCandidates, target);
+		l1.addAll(l2);
+
+		return l1;
 	}
 
-	List<List<Integer>> removeDuplicates(List<List<Integer>> l1) {
-		List<List<Integer>> l2 = new LinkedList<List<Integer>>();
-		Map<String, Boolean> m = new HashMap<String, Boolean>();
-		Iterator<List<Integer>> i = l1.iterator();
-		while (i.hasNext()) {
-			List<Integer> l = i.next();
-			Collections.sort(l);
-			String s = l.toString();
-			if (m.containsKey(s))
-				continue;
-
-			m.put(s, true);
-			l2.add(l);
-		}
-
-		return l2;
+	public static void main(String[] args) {
+		int[] arr = { 2, 3, 6, 7 };
+		System.out.println(combinationSum(arr, 7));
 	}
-
 }
