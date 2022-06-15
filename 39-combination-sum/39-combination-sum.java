@@ -2,6 +2,7 @@ import java.util.*;
 
 class Solution {
 	List<List<Integer>> l;
+	List<Integer> curr;
 	int[] candidates;
 	int target;
 
@@ -9,11 +10,12 @@ class Solution {
 		this.l = new ArrayList<List<Integer>>();
 		this.candidates = candidates;
 		this.target = target;
-		dfs(0, new ArrayList<Integer>(), 0);
+		this.curr = new ArrayList<Integer>();
+		dfs(0, 0);
 		return l;
 	}
 
-	public void dfs(int pointer, List<Integer> curr, int total) {
+	public void dfs(int pointer, int total) {
 		if (total == target) {
 			List<Integer> n = new ArrayList<>(curr);
 			l.add(n);
@@ -24,10 +26,10 @@ class Solution {
 		}
 
 		curr.add(candidates[pointer]);
-		dfs(pointer, curr, total + candidates[pointer]);
+		dfs(pointer, total + candidates[pointer]);
 
 		curr.remove(curr.size() - 1);
-		dfs(pointer + 1, curr, total);
+		dfs(pointer + 1, total);
 	}
 
 	public static void main(String[] args) {
