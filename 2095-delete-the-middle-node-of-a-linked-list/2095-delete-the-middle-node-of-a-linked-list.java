@@ -18,20 +18,17 @@ class Solution {
 			return head;
 		}
 
-		ListNode current = head.next.next;
-		ListNode midPrev = head;
-		int n = 2;
+		ListNode slow = head;
+		ListNode fast = head;
 
-		while (current != null) {
-			n++;
-			current = current.next;
-
-			if (n % 2 == 0) {
-				midPrev = midPrev.next;
-			}
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
 		}
 
-		midPrev.next = midPrev.next.next;
+		slow.val = slow.next.val;
+		slow.next = slow.next.next;
+
 		return head;
 	}
 }
