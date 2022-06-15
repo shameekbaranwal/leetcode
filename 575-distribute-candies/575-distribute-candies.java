@@ -1,10 +1,10 @@
 class Solution {
 	public int distributeCandies(int[] candyType) {
-		List<Integer> list = new ArrayList<Integer>(candyType.length);
+		Set<Integer> set = new HashSet<Integer>(candyType.length);
 		for (int i : candyType)
-			list.add(i);
+			set.add(i);
 
-		return Math.min((new HashSet<Integer>(list)).size(), candyType.length / 2);
+		return Math.min(set.size(), candyType.length / 2);
 	}
 
 }
