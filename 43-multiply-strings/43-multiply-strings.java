@@ -48,31 +48,32 @@ class Solution {
         if (num2.length() < num1.length())
             return add(num2, num1);
 
-        int sz = num2.length();
+        int sz = num1.length();
         int carry = 0;
         String result = "";
         for (int i = 1; i <= sz; i++) {
             int dig2 = num2.charAt(num2.length() - i) - 48;
-            int dig1 = 0;
-            if (i <= num1.length())
-                dig1 = num1.charAt(num1.length() - i) - 48;
+            // int dig1 = 0;
+            // if (i <= num1.length())
+            int dig1 = num1.charAt(num1.length() - i) - 48;
             int sum = (carry + dig1 + dig2);
             carry = sum / 10;
             result = (sum % 10) + result;
         }
+        String remaining = num2.substring(0, num2.length() - sz);
         if (carry != 0)
-            result = carry + result;
+            remaining = add("1", remaining);
 
-        // result = num2.substring(0, num2.length() - sz) + result;
+        result = remaining + result;
         return result;
     }
 
-    // public static void main(String[] args) {
-    //     System.out.println(add("150", "10").equals("160"));
-    //     System.out.println(multiply("5", "6").equals("30"));
-    //     System.out.println(multiply("0", "6").equals("0"));
-    //     System.out.println(multiply("19", "6").equals("114"));
-    //     // System.out.println(multiply("123", "456"));
-    //     System.out.println(multiply("123", "456").equals("56088"));
-    // }
+    public static void main(String[] args) {
+        // System.out.println(add("150", "10").equals("160"));
+        // System.out.println(multiply("5", "6").equals("30"));
+        // System.out.println(multiply("0", "6").equals("0"));
+        // System.out.println(multiply("19", "6").equals("114"));
+        // // System.out.println(multiply("123", "456"));
+        // System.out.println(multiply("123", "456").equals("56088"));
+    }
 }
