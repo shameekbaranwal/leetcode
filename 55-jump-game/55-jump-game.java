@@ -10,8 +10,9 @@ class Solution {
         for(int i = nums.length - 2; i >= 0; i--) {
             if (nums[i] == 0)
                 dp[i] = false;
-            for(int j = 1; j <= nums[i]; j++) {
-                if (i + j < nums.length && dp[i + j])
+            int max = Math.min(nums[i], nums.length - i - 1);
+            for(int j = max; j > 0; j--) {
+                if (dp[i + j])
                     dp[i] = true;
             }
         }
