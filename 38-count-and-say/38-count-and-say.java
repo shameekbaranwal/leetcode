@@ -9,7 +9,7 @@ class Solution {
 
 	public String say(String s) {
 		int len = s.length();
-		String result = "";
+		StringBuilder result = new StringBuilder("");
 		int current = s.charAt(0) - '0', count = 1;
 
 		if (len == 1)
@@ -19,19 +19,18 @@ class Solution {
 			int num = s.charAt(i) - '0';
 
 			if (num != current) {
-				result += (count + "" + current);
+				result.append(count + "" + current);
 				current = num;
 				count = 0;
 			}
 			count++;
 
 			if (i == s.length() - 1) {
-				result += (count + "" + current);
+				result.append(count + "" + current);
 				break;
 			}
 		}
 
-		return result;
-
+		return result.toString();
 	}
 }
