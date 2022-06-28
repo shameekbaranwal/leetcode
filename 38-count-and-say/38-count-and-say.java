@@ -18,23 +18,17 @@ class Solution {
 		for (int i = 1; i < len; i++) {
 			int num = s.charAt(i) - '0';
 
-			if (i == s.length() - 1) {
-				if (num != current) {
-					result += (count + "" + current);
-					count = 1;
-					current = num;
-				} else
-					count++;
-				result += (count + "" + current);
-				break;
-			}
-
 			if (num != current) {
 				result += (count + "" + current);
 				current = num;
 				count = 0;
 			}
 			count++;
+
+			if (i == s.length() - 1) {
+				result += (count + "" + current);
+				break;
+			}
 		}
 
 		return result;
