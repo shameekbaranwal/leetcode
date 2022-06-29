@@ -10,7 +10,8 @@ class Solution {
 		set = new HashSet<>(wordDict);
 		this.s = s;
 		this.len = s.length();
-		dp = new int[len];
+		dp = new int[len + 1];
+		dp[len] = 1;
 		return wordBreakRecursive(0);
 	}
 
@@ -28,6 +29,10 @@ class Solution {
 				dp[index] = 1;
 				return true;
 			}
+
+			if (dp[i + 1] == -1)
+				continue;
+
 			if (set.contains(substr.toString())) {
 				if (wordBreakRecursive(i + 1)) {
 					dp[index] = 1;
