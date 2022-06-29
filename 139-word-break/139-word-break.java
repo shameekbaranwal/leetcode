@@ -44,16 +44,4 @@ class Solution {
 		dp[index] = -1;
 		return false;
 	}
-
-	public static void check(boolean actual, boolean expected, int tc) {
-		System.out.print("TEST CASE " + tc + "  - ");
-		System.out.println(expected == actual ? "PASSED (" + actual + ")"
-				: "FAILED\nExpected: " + expected + "\nActual: " + actual);
-	}
-
-	public static void main(String[] args) {
-		Solution obj = new Solution();
-		check(obj.wordBreak("applepenapple", List.of("apple", "pen")), true, 1);
-		check(obj.wordBreak("catsandog", List.of("cats", "dog", "sand", "and", "cat")), false, 2);
-	}
 }
