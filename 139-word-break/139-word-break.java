@@ -25,10 +25,6 @@ class Solution {
 		StringBuilder substr = new StringBuilder("");
 		for (int i = index; i < len; i++) {
 			substr.append(s.charAt(i));
-			if (dp[i] == 1) {
-				dp[index] = 1;
-				return true;
-			}
 
 			if (dp[i + 1] == -1)
 				continue;
