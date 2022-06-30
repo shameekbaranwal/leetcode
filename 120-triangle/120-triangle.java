@@ -23,8 +23,18 @@ class Solution {
 		if (map.containsKey(key(row, index)))
 			return map.get(key(row, index));
 
-		int s1 = minTot(row + 1, index);
-		int s2 = minTot(row + 1, index + 1);
+		int s1 = 0;
+		int s2 = 0;
+
+		if (map.containsKey(key(row + 1, index)))
+			s1 = map.get(key(row + 1, index));
+		else
+			s1 = minTot(row + 1, index);
+
+		if (map.containsKey(key(row + 1, index + 1)))
+			s2 = map.get(key(row + 1, index + 1));
+		else
+			s2 = minTot(row + 1, index + 1);
 
 		map.put(key(row, index), triangle.get(row).get(index) + Math.min(s1, s2));
 		return map.get(key(row, index));
