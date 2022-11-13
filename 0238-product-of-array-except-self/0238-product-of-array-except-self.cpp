@@ -12,12 +12,12 @@ public:
         int actualProduct = zeroesCount > 0 ? 0 : product;
         
         for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] != 0) 
+            if (nums[i] != 0) {
                 nums[i] = actualProduct / nums[i];
-            else {
-                if (zeroesCount == 1) nums[i] = product;
-                else nums[i] = 0;
+                continue;
             }
+            
+            nums[i] = zeroesCount == 1 ? product : 0;
         }
         
         return nums;
