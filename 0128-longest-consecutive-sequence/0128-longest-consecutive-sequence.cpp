@@ -7,25 +7,22 @@ public:
         
         // make a hashset
         unordered_set<int> set(nums.begin(), nums.end());
-        
-        vector<int> startOfSequences;
-        
-        // collect the starting number of every sequence
-        for (int i = 0; i < nums.size(); i++) {
-            if (set.find(nums[i] - 1) == set.end())
-                startOfSequences.push_back(nums[i]);
-        }
-        
-        // find the size of every sequence
+                
         int maxValue = 0;
-        for (int i = 0; i < startOfSequences.size(); i++) {
-            int value = startOfSequences[i];
-            int size = 0;
-            while (set.find(value) != set.end()) {
-                size++;
-                value++;
+
+        for (int i = 0; i < nums.size(); i++) {
+            if (set.find(nums[i] - 1) == set.end()) {
+                int value = nums[i];
+                int size = 0;
+                
+                while (set.find(value) != set.end()) {
+                    size++;
+                    value++;
+                }
+                
+                maxValue = max(maxValue, size);
+                
             }
-            maxValue = max(maxValue, size);
         }
         
         return maxValue;
