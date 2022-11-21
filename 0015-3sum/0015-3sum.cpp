@@ -24,7 +24,7 @@ public:
                 }
                 
                 if (sum < targetSum || 
-                    (nums[start] == nums[start-1] && start > i + 1)) {
+                    (nums[start] == nums[start - 1] && start > i + 1)) {
                     start++;
                     continue;
                 }
