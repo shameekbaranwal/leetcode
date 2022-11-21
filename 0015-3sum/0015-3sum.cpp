@@ -7,7 +7,7 @@ public:
         if (nums.size() < 3) return triplets;
     
         for (int i = 0; i < nums.size(); i++) {
-            if (isRepeated(nums, i)) continue;
+            if ((i > 0 && nums[i] == nums[i-1])) continue;
             if (nums[i] > 0) break;
                 
             int targetSum = -nums[i];
@@ -23,7 +23,8 @@ public:
                     continue;
                 }
                 
-                if (sum < targetSum || (nums[start] == nums[start-1] && start > i + 1)) {
+                if (sum < targetSum || 
+                    (nums[start] == nums[start-1] && start > i + 1)) {
                     start++;
                     continue;
                 }
@@ -37,7 +38,4 @@ public:
         return triplets;
     }
     
-    bool isRepeated(vector<int> &nums, int i) {
-        return (i > 0 && nums[i] == nums[i-1]);
-    }
 };
