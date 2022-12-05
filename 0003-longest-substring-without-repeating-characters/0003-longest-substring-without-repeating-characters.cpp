@@ -33,7 +33,7 @@ public:
             char c = s[j];
             int sz = set.size();
             set.insert(c);
-            // if the letter was not unique, stop travelling,
+            // if the letter was not unique, stop travelling.
             if (set.size() == sz) {
                 travelling = false;
                 look_for = c;
